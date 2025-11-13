@@ -69,25 +69,6 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Open Source */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-                Open Source <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white backdrop-blur-md">
-                <DropdownMenuItem asChild>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="cursor-pointer">
-                    GitHub Repositories
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href="#opensource" className="cursor-pointer">
-                    Contributions Guide
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
             {/* Figma */}
             <a href="#figma" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
               Figma
@@ -159,9 +140,6 @@ const Navbar = () => {
               ))}
             </div>
             <div className="border-t border-gray-200 pt-4 space-y-2">
-              <a href="#opensource" className="block py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors">
-                Open Source
-              </a>
               <a href="#figma" className="block py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors">
                 Figma
               </a>
