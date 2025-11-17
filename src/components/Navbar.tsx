@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,10 +8,28 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
 import sfwLogo from "@/assets/sfw-logo.svg";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVideoDialogOpen, setIsVideoDialogOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (isVideoDialogOpen && videoRef.current) {
+      videoRef.current.play().catch((error) => {
+        // Autoplay may be blocked by browser policy, user can click play
+        console.log("Autoplay blocked:", error);
+      });
+    } else if (!isVideoDialogOpen && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isVideoDialogOpen]);
 
   const productLinks = [
     { name: "SFW Matching Tool", url: "https://sfwmatchingtool.vercel.app/" },
@@ -149,6 +167,21 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            {/* Video Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                Video <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-72 bg-white backdrop-blur-md">
+                <DropdownMenuItem
+                  onClick={() => setIsVideoDialogOpen(true)}
+                  className="cursor-pointer"
+                >
+                  SFW Video
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* CTA Buttons */}
             <Link to="/login">
               <Button size="sm" className="bg-dodger-blue-500 text-white hover:bg-dodger-blue-600 shadow-lg">
@@ -235,6 +268,18 @@ const Navbar = () => {
                   </a>
                 ))}
               </div>
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase">Video</p>
+                <button
+                  onClick={() => {
+                    setIsVideoDialogOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="block py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors pl-4 w-full text-left"
+                >
+                  SFW Video
+                </button>
+              </div>
             </div>
             <div className="border-t border-gray-200 pt-4 space-y-2">
               <Link to="/login" className="block" onClick={() => setIsMobileMenuOpen(false)}>
@@ -246,6 +291,22 @@ const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* Video Dialog */}
+      <Dialog open={isVideoDialogOpen} onOpenChange={setIsVideoDialogOpen}>
+        <DialogContent className="max-w-4xl w-full p-0 bg-black">
+          <div className="relative w-full aspect-video">
+            <video
+              ref={videoRef}
+              src="/SFW.mp4"
+              controls
+              className="w-full h-full object-contain"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 };
