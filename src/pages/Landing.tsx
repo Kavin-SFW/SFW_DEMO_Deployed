@@ -34,7 +34,7 @@ const Landing = () => {
         "Interactive data visualizations",
         "Custom report generation",
       ],
-      demoUrl: "https://qxxcbwpmeasz5qsuscyfnt.streamlit.app/",
+      demoUrl: "https://sfwexecutivedashboard.streamlit.app/",
     },
   ];
 
