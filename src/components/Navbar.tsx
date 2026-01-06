@@ -37,6 +37,7 @@ const Navbar = () => {
     { name: "Executive Financial Management Dashboard", url: "https://sfwexecutivedashboard.streamlit.app/" },
     { name: "SFW Zerra", url: "https://zerra-2025.vercel.app/" },
     { name: "CRM", url: "https://dev-crm.up.railway.app/" },
+    { name: "SFW -Gram", url: "https://sfwgram.vercel.app/" },
   ];
 
   const applicationLinks = [
