@@ -38,6 +38,7 @@ const Navbar = () => {
     { name: "SFW Zerra", url: "https://zerra-2025.vercel.app/" },
     { name: "CRM", url: "https://dev-crm.up.railway.app/" },
     { name: "Radiology", url: "https://radiology-wine.vercel.app/" },
+    { name: "LMS", url: "https://lms-ui-production.up.railway.app/" },
   ];
 
   const applicationLinks = [
